@@ -6,6 +6,16 @@ class CohortRepository:
     def __init__(self,connection):
         self._connection = connection
 
+    def all(self):
+        rows = self._connection.execute(
+            'SELECT * FROM cohorts'
+        )
+        cohorts = []
+        for row in rows:
+            item = Cohort(row['id'], row['name'], row['starting_date'])
+            cohorts.append(item)
+        return cohorts
+
     def find_with_students(self,cohort_id):
         rows = self._connection.execute(
             'SELECT cohorts.id AS cohort_id, cohorts.name AS cohort_name, cohorts.starting_date, students.id AS student_id, students.name AS student_name '\

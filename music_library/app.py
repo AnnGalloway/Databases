@@ -1,5 +1,4 @@
 # file: app.py
-import sys
 from lib.artist_repository import ArtistRepository
 from lib.album_repository import AlbumRepository
 from lib.database_connection import DatabaseConnection

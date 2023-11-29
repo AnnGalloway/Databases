@@ -9,7 +9,7 @@ CREATE SEQUENCE IF NOT EXISTS cohorts_id_seq;
 CREATE TABLE cohorts (
   id SERIAL PRIMARY KEY,
   name text,
-  starting_date date
+  starting_date text
 );
 
 CREATE SEQUENCE IF NOT EXISTS students_id_seq;
@@ -19,9 +19,9 @@ CREATE TABLE students (
   cohort_id int
 );
 
-INSERT INTO cohorts (name, starting_date) VALUES ('October', '2023-10-30');
-INSERT INTO cohorts (name, starting_date) VALUES ('August', '2023-08-01');
-INSERT INTO cohorts (name, starting_date) VALUES ('February', '2023-02-01');
+INSERT INTO cohorts (name, starting_date) VALUES ('October', '30 oct');
+INSERT INTO cohorts (name, starting_date) VALUES ('August', '1 aug');
+INSERT INTO cohorts (name, starting_date) VALUES ('February', '1 feb');
 
 INSERT INTO students (name, cohort_id) VALUES ('person1', 1);
 INSERT INTO students (name, cohort_id) VALUES ('person2', 1);

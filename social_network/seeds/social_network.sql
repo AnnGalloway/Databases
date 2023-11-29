@@ -4,10 +4,11 @@
 -- database state, and that tests don't interfere with each other.
 
 -- First, we must delete (drop) all our tables
-DROP TABLE IF EXISTS user_accounts;
-DROP SEQUENCE IF EXISTS user_accounts_id_seq;
 DROP TABLE IF EXISTS posts;
 DROP SEQUENCE IF EXISTS posts_id_seq;
+DROP TABLE IF EXISTS user_accounts;
+DROP SEQUENCE IF EXISTS user_accounts_id_seq;
+
 
 --Then, we recreate them
 CREATE SEQUENCE IF NOT EXISTS user_accounts_id_seq;

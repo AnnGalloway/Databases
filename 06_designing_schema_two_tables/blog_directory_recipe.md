@@ -46,11 +46,11 @@ Put the different nouns in this table. Replace the example with your own nouns.
 
 1. Name of the first table (always plural): `posts` 
 
-    Column names: `title`, `release_year`
+    Column names: `title`, `content`
 
-2. Name of the second table (always plural): `artists` 
+2. Name of the second table (always plural): `comments` 
 
-    Column names: `name`
+    Column names: `content`, `author`, `post_id`
 
 ## 3. Decide the column types
 
@@ -63,14 +63,16 @@ Remember to **always** have the primary key `id` as a first column. Its type wil
 ```
 # EXAMPLE:
 
-Table: albums
+Table: Posts
 id: SERIAL
 title: text
-release_year: int
+content: text
 
-Table: artists
+Table: Comments
 id: SERIAL
-name: text
+content: text
+author: text
+post_id: int
 ```
 
 ## 4. Decide on The Tables Relationship
@@ -93,14 +95,14 @@ Replace the relevant bits in this example with your own:
 ```
 # EXAMPLE
 
-1. Can one artist have many albums? YES
-2. Can one album have many artists? NO
+1. Can one post have many comments? YES
+2. Can one comment have many posts? NO
 
 -> Therefore,
--> An artist HAS MANY albums
--> An album BELONGS TO an artist
+-> A post HAS MANY comments
+-> A comment BELONGS TO an post
 
--> Therefore, the foreign key is on the albums table.
+-> Therefore, the foreign key is on the comments table.
 ```
 
 *If you can answer YES to the two questions, you'll probably have to implement a Many-to-Many relationship, which is more complex and needs a third table (called a join table).*
@@ -114,20 +116,21 @@ Replace the relevant bits in this example with your own:
 -- Replace the table name, columm names and types.
 
 -- Create the table without the foreign key first.
-CREATE TABLE artists (
+CREATE TABLE Posts (
   id SERIAL PRIMARY KEY,
-  name text,
+  title text,
+  content text
 );
 
 -- Then the table with the foreign key second.
-CREATE TABLE albums (
+CREATE TABLE Comments (
   id SERIAL PRIMARY KEY,
-  title text,
-  release_year int,
+  content text,
+  author text,
 -- The foreign key name is always {other_table_singular}_id
-  artist_id int,
-  constraint fk_artist foreign key(artist_id)
-    references artists(id)
+  post_id int,
+  constraint fk_post foreign key(post_id)
+    references posts(id)
     on delete cascade
 );
 
